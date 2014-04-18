@@ -1,0 +1,7 @@
+syntax: glob
+Tokens.json
+bin
+obj
+*.user
+*.suo
+packages/*/*
