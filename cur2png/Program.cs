@@ -5,8 +5,6 @@
 // you should optimize the generated files with https://bitbucket.org/rgl/imageoptiz/downloads
 
 using ImageMagick;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -56,21 +54,8 @@ namespace cur2png
 
                 //Console.WriteLine("{0} -- {1} {2}x{3} BoundingBox={4}x{5} HotSpot={6}x{7}", pngPath, image.Format, image.Width, image.Height, image.BoundingBox.Width, image.BoundingBox.Height, hotSpot.X, hotSpot.Y);
 
-                File.WriteAllText(jsonPath, ToJson(hotSpot));
+                File.WriteAllText(jsonPath, hotSpot.ToJson());
             }
-        }
-
-        private static readonly JsonSerializerSettings JsonSerializerSettings = new JsonSerializerSettings { ContractResolver = new CamelCasePropertyNamesContractResolver() };
-
-        private static string ToJson(object o)
-        {
-            return JsonConvert.SerializeObject(o, JsonSerializerSettings);
-        }
-
-        public class HotSpot
-        {
-            public int X { get; set; }
-            public int Y { get; set; }
         }
 
         public static HotSpot[] GetCursorHotSpots(string path)
